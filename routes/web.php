@@ -3,13 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReadingController;
 
+// Home route - Redirect to Readings Index
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/index');
 });
 
-// <-------------------INDEX FOR READ------------------->//
-Route::get('/index', [ReadingController::class, 'index'])->name('index');
-
-// <-------------------INDEX FOR CREATE------------------->//
-Route::view('/create', [ReadingController::class, 'create'])->name('create');
-
+// Web Routes for Blade Templates
+Route::any('/', [ReadingController::class, 'showIndex'])->name('index');
+Route::any('/create', [ReadingController::class, 'create'])->name('create');
+Route::any('/edit/{reading}', [ReadingController::class, 'edit'])->name('edit');

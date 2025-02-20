@@ -7,69 +7,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Live Readings Index</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- <link rel="stylesheet" href="css/index.css"> --}}
 </head>
 
 <body>
-    <div>
+    <div id="content">
         <div class="flex justify-center mt-1">
             <h1 class="text-4xl pr-3 my-4">Readings Index</h1>
-            <div class="my-4">
-                {{-- <x-button style="primary" type="submit" id="createData">
-                    Create
-                </x-button> --}}
-                <a href="{{'create'}}" type="button" class="text-white bg-blue-700 px-5 py-2 text-lg font-medium rounded-lg transition duration-300 hover:bg-blue-800">Create</a>
-            </div>
+        </div>
+        <div class="my-4 flex justify-center mt-1">
+            <a href="/create" id="createReadingPage" class="bg-blue-500 text-white px-4 py-2 rounded">
+                Create
+            </a>
         </div>
 
         <div class="flex justify-center mt-1">
             <h1 class="text-4xl pr-3 my-3">Live Readings Index</h1>
             <div class="mt-3 mr-1">
-                <x-button style="primary" type="submit" id="fetchData">
+                <button id="fetchData" class="bg-green-500 text-white px-4 py-2 rounded">
                     Start
-                </x-button>
+                </button>
             </div>
             <div class="mt-3">
-                <x-button style="primary" type="submit" id="unfetchData">
+                <button id="unfetchData" class="bg-red-500 text-white px-4 py-2 rounded">
                     Stop
-                </x-button>
+                </button>
             </div>
         </div>
-        <div class="ml-[35%] mr-[40%] bg-green-500">
-            <h4 class="text-center bg-green-50 text-white p-2">{{ session('success') }}</h4>
-        </div>
-        {{-- table --}}
         <div class="flex justify-center mt-1">
             <table class="w-auto border-red-500 border-2 mx-auto">
-                <thead style="color: indigo;">
+                <thead class="text-indigo-600">
                     <tr>
                         <th>ID</th>
-                        <th>Volatge</th>
+                        <th>Voltage</th>
                         <th>Current</th>
                         <th>Current Time</th>
-                        {{-- <th>Save Time</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="dataList">
-                    {{-- <tr>
-                        <td id="sr">----</td>  
-                        <td id="voltageDisplay">----</td>  
-                        <td id="currentDisplay">----</td>  
-                        <td id="timeDisplay">----</td>  
-                        <td id="currenttimeDisplay">----</td>  
-                        <td>
-                            <div style="margin-block: 5px">
-                                <a href="#" class="btn">Edit</a>
-                                <a href="#" class="btn">Delete</a>
-                            </div>
-                        </td>
-                    </tr> --}}
-                </tbody>
+                <tbody id="dataList"></tbody>
             </table>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/jQuery.js"></script>
 </body>
+
 </html>

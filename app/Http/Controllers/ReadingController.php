@@ -4,33 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reading;
-use Illuminate\Support\Facades\Validator;
 
 class ReadingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function indexApi() {
-        return response()->json(Reading::all());
-    }
-    public function index()
+    // Show Readings Index Page
+    public function showIndex()
     {
         return view('index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Show Create New Readings Page
     public function create()
     {
         return view('create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // Show Edit Reading Page
+    public function edit($id)
+    {
+
+        $reading = Reading::findOrFail($id);
+        return view('edit', ['reading' => $reading]);
+    }
+
+    // ==================== API METHODS ====================
+
+    // Fetch all readings (API)
+    public function getReadings()
+    {
+        return response()->json(Reading::all());
+    }
+
+    // Store a new reading (API)
+    public function storeReading(Request $request)
     {
         // Validate the incoming data
         $validated = $request->validate([
@@ -42,44 +48,41 @@ class ReadingController extends Controller
         $reading = new Reading();
         $reading->voltage = $validated['voltage'];
         $reading->current = $validated['current'];
-    
+
         // Save the Reading instance to the database
         $reading->save();
-    
+
         // Return success response
         return response()->json(['success' => 'Data saved successfully'], 200);
     }
-    
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Edit a reading (API)
+    public function editReading(Request $request)
     {
-        //
+
+        $reading = Reading::findOrFail($request->id);
+
+        $validated = $request->validate([
+            'voltage' => 'required|numeric',
+            'current' => 'required|numeric',
+        ]);
+
+        $reading->voltage = $validated['voltage'];
+        $reading->current = $validated['current'];
+
+        // Save the Reading instance to the database
+        $reading->save();
+
+        // Return success response
+        return response()->json(['success' => 'Data saved successfully'], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // Delete a reading (API)
+    public function deleteReading($id)
     {
-        //
-    }
+        $reading = Reading::findOrFail($id);
+        $reading->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json(['success' => 'Reading deleted successfully']);
     }
 }

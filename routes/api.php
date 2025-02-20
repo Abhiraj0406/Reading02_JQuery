@@ -4,12 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReadingController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
-// <-------------------INDEX FOR <=READ-API=>-------------------> //
-Route::get('/indexapi', [ReadingController::class, 'indexApi']);
-
-// <-------------------INDEX FOR <=CREATE-API=>-------------------> //
-Route::post('/storedata', [ReadingController::class, 'store'])->name('store');
+// API Routes for Readings
+Route::get('/indexapi', [ReadingController::class, 'getReadings']);
+Route::post('/storeapi', [ReadingController::class, 'storeReading']);
+Route::post('/editapi',[ReadingController::class, 'editReading']);
+Route::delete('/deleteapi/{id}', [ReadingController::class, 'deleteReading']);
