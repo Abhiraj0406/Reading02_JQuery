@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('readings', function (Blueprint $table) {
             $table->id();
-            $table->integer('voltage');
-            $table->integer('current');
+            $table->decimal('voltage', 8, 2);
+            $table->decimal('current', 8, 2);
+            $table->decimal('gf', 8, 2)->default(0);
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReadingController;
 
 // API Routes for Readings
-Route::get('/indexapi', [ReadingController::class, 'getReadings']);
-Route::post('/storeapi', [ReadingController::class, 'storeReading']);
-Route::post('/editapi',[ReadingController::class, 'editReading']);
+Route::post('/indexapi', [ReadingController::class, 'getReadings'])->name('indexapi');
+Route::post('/storeapi', [ReadingController::class, 'storeReading'])->name('storeapi');
+Route::post('/editapi',[ReadingController::class, 'editReading'])->name('editapi');
 Route::delete('/deleteapi/{id}', [ReadingController::class, 'deleteReading']);

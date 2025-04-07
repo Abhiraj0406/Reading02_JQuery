@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Edit Readings</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -16,8 +17,9 @@
         </div>
         <div class="flex justify-center mt-1">
             <form action="{{ route('index', $reading->id) }}" id="editForm" class="max-w-sm mx-auto" method="POST">
-
                 @csrf
+
+                <input type="hidden" name="_method" value="PUT">
                 <div class="mb-5">
                     <input disabled type="number" id="id" name="id"
                         class="bg-gray-50 border border-gray-300 mx-10 mr-5 px-5 py-1 flex justify-center text-center text-md rounded p-2"
@@ -31,6 +33,8 @@
                     <input type="number" id="amp" name="current"
                         class="bg-gray-50 border border-gray-300 px-2 py-1 w-full"
                         value="{{ old('current', $reading->current) }}">
+                    <br><br>
+                    Input GF:-> <input type="text" name="gf" id="gf" value="{{old('gf', $reading->gf)}}" class=" bg-slate-300">
                     <br><br>
                 </div>
                 <div class="flex justify-center">

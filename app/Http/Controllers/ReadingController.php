@@ -65,10 +65,12 @@ class ReadingController extends Controller
         $validated = $request->validate([
             'voltage' => 'required|numeric',
             'current' => 'required|numeric',
+            'gf' => 'required|numeric',
         ]);
 
         $reading->voltage = $validated['voltage'];
         $reading->current = $validated['current'];
+        $reading->gf = $validated['gf'];
 
         // Save the Reading instance to the database
         $reading->save();

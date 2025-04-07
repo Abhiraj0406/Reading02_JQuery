@@ -40,6 +40,7 @@
                         <th>ID</th>
                         <th>Voltage</th>
                         <th>Current</th>
+                        <th>GF</th>
                         <th>Current Time</th>
                         <th>Action</th>
                     </tr>

@@ -7,16 +7,20 @@ $(document).ready(function () {
     function fetchReading() {
         $.ajax({
             url: apiUrl + "/indexapi",
-            type: "GET",
+            type: "POST",
             dataType: "json",
             success: function (response) {
                 $("#dataList").empty(); // Clear existing data
                 response.forEach(function (item) {
+                    // Calculate the sum of current and gf, handling all numeric values (decimal, negative, positive)
+                    let currentSum = parseFloat(item.current) + parseFloat(item.gf);
+
                     $("#dataList").append(
                         `<tr>
                             <td>${item.id}</td>
                             <td>${item.voltage}V</td>
-                            <td>${item.current}A</td>   
+                            <td>${currentSum.toFixed(2)}A</td>   
+                            <td>${item.gf}</td>   
                             <td>${new Date().toLocaleTimeString("en-US", {
                                 hour12: true,
                                 hour: "numeric",
@@ -94,10 +98,11 @@ $(document).ready(function () {
     function editData() {
         let voltage = $("#volt").val();
         let current = $("#amp").val();
+        let gf = $("#gf").val();
         let id = $("#id").val();
 
         // Ensure fields are not empty
-        if (!voltage || !current) {
+        if (!voltage || !current || !gf) {
             alert("Please enter voltage and current values.");
             return;
         }
@@ -110,6 +115,7 @@ $(document).ready(function () {
                 id: id,
                 voltage: voltage,
                 current: current,
+                gf: gf,
             }),
             success: function (response) {
                 console.log("Data sent successfully:", response);

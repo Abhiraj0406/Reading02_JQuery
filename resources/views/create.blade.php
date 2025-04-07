@@ -15,8 +15,7 @@
             <h1 class="text-4xl pr-3 my-4">Create New Readings</h1>
         </div>
         <div class="flex justify-center mt-1">
-            <form id="readingForm" class="max-w-sm mx-auto" method="POST">
-                @method('POST')
+            <form id="readingForm" class="max-w-sm mx-auto" action="{{route('storeapi')}}" method="POST">
                 @csrf
                 <div class="mb-5">
                     <label class="text-2xl">Voltage:</label>
